@@ -1,9 +1,10 @@
 @import "reset.scss";
 @import "variables.scss";
+@import "button.scss";
 
 //@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 //
-//.container {
-//  max-width: 1300px;
-//  margin: 0 auto;
-//}
+.container {
+  max-width: 1130px;
+  margin: 0 auto;
+}
