@@ -14,9 +14,7 @@ export default {
   @import "../assets/scss/variables";
 
   .footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
+    flex-shrink: 0;
     height: 40px;
     background: $color-black;
     width: 100%;

@@ -19,7 +19,8 @@ const app = express()
 const port = process.env.PORT || 8080
 app.use(express.json())
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
-app.use('/scraps', router.scrapRouter)
+app.use('/scraps', router.scrapRouter);
+app.use('/goods', router.goodsRouter);
 
 app.listen(3000, () => {
     console.log('server on port ' + 3000)
