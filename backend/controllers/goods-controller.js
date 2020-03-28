@@ -1,17 +1,12 @@
-// const Goods = require('../models/goodsList');
-const test = require('../models/goodsList');
+const Goods = require('../models/goodsList');
 
 class GoodsController {
     constructor(){}
     getGoods = async (req, res) => {
-        // console.log('goods', Goods);
-        // return res.json({
-        //     goods,
-        // })
+        return res.send(Goods)
     };
 }
 
-console.log('test', test)
 
 
 module.exports = GoodsController;

@@ -3,24 +3,30 @@ const swaggerUi = require('swagger-ui-express');
 // const swaggerDocument = require('../swagger');
 const router = require('./routers/export-router');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const options = {
     customJs: '/custom.js'
   };
 
-mongoose.connect('mongodb://127.0.0.1:27017/express-server', {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true
-})
+// mongoose.connect('mongodb://127.0.0.1:27017/express-server', {
+//     useNewUrlParser: true,
+//     useCreateIndex: true,
+//     useFindAndModify: false,
+//     useUnifiedTopology: true
+// })
 
 const app = express()
+app.use(cors());
 const port = process.env.PORT || 8080
 app.use(express.json())
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
-app.use('/scraps', router.scrapRouter);
+// app.use('/scraps', router.scrapRouter);
 app.use('/goods', router.goodsRouter);
+
+app.use('/', (req, res) => {
+    res.send(`server is on port ${port}`)
+});
 
 app.listen(3000, () => {
     console.log('server on port ' + 3000)

@@ -7,11 +7,11 @@
           <div class="menu-table-header__item">Price</div>
           <div class="menu-table-header__item">Add to cart</div>
         </div>
-        <div class="menu-table-content">
-           <div class="menu-table-content__title">Margharita</div>
+        <div class="menu-table-content" v-for="item in goodsList" :key="item.id">
+           <div class="menu-table-content__title">{{ item.name }}</div>
           <div class="menu-table-content-desc">
-            <div class="menu-table-content-desc__item">9 ''</div>
-            <div class="menu-table-content-desc__item">12.95</div>
+            <div class="menu-table-content-desc__item">{{ item.size }} ''</div>
+            <div class="menu-table-content-desc__item">{{ item.price }}</div>
             <div class="menu-table-content-desc__item">
               <button>+</button>
             </div>
@@ -23,8 +23,23 @@
 </template>
 
 <script>
+import GoodsApi from '../api/GoodsApi';
+
 export default {
   name: 'MenuTemplate',
+  data() {
+    return {
+      goodsList: [],
+    };
+  },
+  beforeMount() {
+    GoodsApi.getGoodsList()
+      .then((resp) => {
+        this.goodsList = resp.data;
+      }).catch((err) => {
+        console.error(err);
+      });
+  },
 };
 </script>
 
