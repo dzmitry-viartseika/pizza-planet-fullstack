@@ -22,6 +22,9 @@
         </div>
       </div>
       <div class="menu-cart">
+        <div class="menu-cart__info"
+             v-if="cartList.length === 0"
+        >Your cart is empty!</div>
         <div class="menu-cart-header">
           <div class="menu-cart-header__item">Size</div>
           <div class="menu-cart-header__item">Price</div>
@@ -44,9 +47,13 @@
             {{ el.name }} {{ el.size }}
           </div>
           <div class="menu-cart-content-desc__item">
-            {{ el.price }}
+            {{ el.price * el.quantity }}
           </div>
         </div>
+        <div class="menu-cart-total">
+          Order total:
+        </div>
+        <button>Place Order</button>
       </div>
     </div>
   </div>
@@ -64,6 +71,9 @@ export default {
     };
   },
   methods: {
+    removeFromCart(el) {
+      this.cartList.splice(this.cartList.indexOf(el), 1);
+    },
     addToCart(naming, options) {
       const item = {
         name: naming,
@@ -80,9 +90,8 @@ export default {
     quantityMinus(el) {
       // eslint-disable-next-line no-param-reassign,no-plusplus
       el.quantity--;
-      if (el.quantity < 0) {
-        // eslint-disable-next-line no-param-reassign,no-plusplus
-        el.quantity = 0;
+      if (el.quantity === 0) {
+        this.removeFromCart(el);
       }
     },
   },
