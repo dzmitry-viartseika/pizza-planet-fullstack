@@ -9,12 +9,42 @@
         </div>
         <div class="menu-table-content" v-for="item in goodsList" :key="item.id">
            <div class="menu-table-content__title">{{ item.name }}</div>
-          <div class="menu-table-content-desc">
-            <div class="menu-table-content-desc__item">{{ item.size }} ''</div>
-            <div class="menu-table-content-desc__item">{{ item.price }}</div>
+          <div class="menu-table-content-desc"
+               v-for="(elem, i) in item.options"
+               :key="i"
+          >
+            <div class="menu-table-content-desc__item">{{ elem.size }} ''</div>
+            <div class="menu-table-content-desc__item">{{ elem.price }}</div>
             <div class="menu-table-content-desc__item">
-              <button>+</button>
+              <button @click="addToCart(item.name, elem)">+</button>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-cart">
+        <div class="menu-cart-header">
+          <div class="menu-cart-header__item">Size</div>
+          <div class="menu-cart-header__item">Price</div>
+          <div class="menu-cart-header__item">Add to cart</div>
+        </div>
+        <div class="menu-cart-content"
+             v-for="(el, i) in cartList"
+             :key="i"
+        >
+          <div class="menu-cart-content-desc__item">
+            <button @click="quantityMinus(el)">
+              -
+            </button>
+            {{ el.quantity }}
+            <button  @click="quantityPlus(el)">
+              +
+            </button>
+          </div>
+          <div class="menu-cart-content-desc__item">
+            {{ el.name }} {{ el.size }}
+          </div>
+          <div class="menu-cart-content-desc__item">
+            {{ el.price }}
           </div>
         </div>
       </div>
@@ -29,8 +59,32 @@ export default {
   name: 'MenuTemplate',
   data() {
     return {
+      cartList: [],
       goodsList: [],
     };
+  },
+  methods: {
+    addToCart(naming, options) {
+      const item = {
+        name: naming,
+        size: options.size,
+        price: options.price,
+        quantity: 1,
+      };
+      this.cartList.push(item);
+    },
+    quantityPlus(el) {
+      // eslint-disable-next-line no-param-reassign,no-plusplus
+      el.quantity++;
+    },
+    quantityMinus(el) {
+      // eslint-disable-next-line no-param-reassign,no-plusplus
+      el.quantity--;
+      if (el.quantity < 0) {
+        // eslint-disable-next-line no-param-reassign,no-plusplus
+        el.quantity = 0;
+      }
+    },
   },
   beforeMount() {
     GoodsApi.getGoodsList()
@@ -45,7 +99,13 @@ export default {
 
 <style scoped lang="scss">
   .menu {
-    &-table {
+    &-cart {
+      &-content {
+        display: flex;
+        flex-direction: row;
+      }
+    }
+    &-table, &-cart {
       width: 600px;
       &-header {
         display: flex;
