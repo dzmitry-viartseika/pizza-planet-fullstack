@@ -9,7 +9,7 @@
     "dev": "nodemon ../backend/src/index.js",
     "mongo": "/Users/user/mongodb/bin/mongod.exe --dbpath=/Users/user/mongodb-data"
   },
-  "author": "yasinsky vladimir",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^16.1.4",

@@ -9,4 +9,10 @@ export default {
     });
     return instWithCred.get('/getGoods');
   },
+  addNewItem(item) {
+    const instWithCred = axios.create({
+      baseURL: domains.GOODS_LIST,
+    });
+    return instWithCred.post('/newItem', { item });
+  },
 };
