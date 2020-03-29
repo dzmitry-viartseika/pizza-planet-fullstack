@@ -2,9 +2,14 @@
   <div class="pizza">
     <h2 class="title">Add new Pizza:</h2> {{ newItem }}
     <form>
-      <div class="text-field">
+      <div class="text-field"
+           :class="{ 'form-group--error': $v.name.$error }"
+      >
         <div class="text-field__info">Name</div>
-        <input type="text" v-model="newItem.name">
+        <input type="text" v-model.trim="$v.name.$model">
+        <div class="error" v-if="!$v.name.required">Email is required</div>
+        <div class="error" v-if="!$v.name.minLength">Email must have at least
+          {{$v.name.$params.minLength.min}} letters.</div>
       </div>
       <div class="text-field">
         <div class="text-field__info">Description</div>
@@ -34,14 +39,16 @@
 </template>
 
 <script>
+import { required, minLength } from 'vuelidate/lib/validators';
 import GoodsApi from '../api/GoodsApi';
 
 export default {
   name: 'PizzaComponent',
   data() {
     return {
+      name: null,
       newItem: {
-        name: '',
+        name1: '',
         description: '',
         options: [
           {
@@ -56,9 +63,17 @@ export default {
       },
     };
   },
+  validations: {
+    name: {
+      required,
+      minLength: minLength(4),
+    },
+    description: {
+      minLength: minLength(4),
+    },
+  },
   methods: {
     addItem() {
-      console.log(this.newItem);
       GoodsApi.addNewItem(this.newItem);
     },
   },
