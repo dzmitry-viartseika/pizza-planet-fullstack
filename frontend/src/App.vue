@@ -5,6 +5,7 @@
     <MenuTemplate/>
     <AdminTemplate/>
     <PizzaComponent/>
+    <LoginTemplate/>
     <FooterTemplate/>
     <router-view/>
   </div>
@@ -17,10 +18,12 @@ import BannerTemplate from './components/BannerTemplate.vue';
 import MenuTemplate from './components/MenuTemplate.vue';
 import AdminTemplate from './components/AdminTemplate.vue';
 import PizzaComponent from './components/PizzaComponent.vue';
+import LoginTemplate from './components/LoginTemplate.vue';
 
 export default {
   name: 'Home',
   components: {
+    LoginTemplate,
     PizzaComponent,
     HeaderTemplate,
     FooterTemplate,
