@@ -5,7 +5,18 @@
         <div class="home-banner-info">
           <div class="home-banner-info__main">
             <h1 class="home-banner-info__main-title">Welcome to Pizza Planet!</h1>
-            <h2 class="home-banner-info__main-subtitle">Feeling hungry?</h2>
+            <template v-if="!editState">
+              <h2 class="home-banner-info__main-subtitle"
+                  @click="editState = true"
+              >{{ message }}</h2>
+            </template>
+            <template v-else>
+              <input type="text"
+                     v-model="message"
+                     style="display: block"
+                     @keyup.enter="editState = false"
+              >
+            </template>
             <button class="button">Let's order!</button>
           </div>
         </div>
@@ -17,6 +28,12 @@
 <script>
 export default {
   name: 'BannerTemplate',
+  data() {
+    return {
+      message: 'Feeling hungry?',
+      editState: false,
+    };
+  },
 };
 </script>
 
