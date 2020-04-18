@@ -60,7 +60,6 @@ class GoodsController {
             item.description = req.body.item.description,
             item.options = req.body.item.options,
         item.save()
-        // res.send(item);
     }
 }
 
