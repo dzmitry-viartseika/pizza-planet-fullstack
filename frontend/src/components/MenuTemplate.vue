@@ -9,6 +9,7 @@
         </div>
         <div class="menu-table-content" v-for="item in goodsList" :key="item.id">
            <div class="menu-table-content__title">{{ item.name }}</div>
+           <div class="menu-table-content__title">{{ item.description }}</div>
           <div class="menu-table-content-desc"
                v-for="(elem, i) in item.options"
                :key="i"

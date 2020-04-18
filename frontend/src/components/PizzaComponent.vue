@@ -6,7 +6,7 @@
            :class="{ 'form-group--error': $v.name.$error }"
       >
         <div class="text-field__info">Name</div>
-        <input type="text" v-model.trim="$v.name.$model">
+        <input type="text" v-model.trim="newItem.name">
         <div class="error" v-if="!$v.name.required">Email is required</div>
         <div class="error" v-if="!$v.name.minLength">Email must have at least
           {{$v.name.$params.minLength.min}} letters.</div>
@@ -46,9 +46,8 @@ export default {
   name: 'PizzaComponent',
   data() {
     return {
-      name: null,
       newItem: {
-        name1: '',
+        name: '',
         description: '',
         options: [
           {

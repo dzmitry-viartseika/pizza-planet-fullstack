@@ -9,12 +9,18 @@ const options = {
     customJs: '/custom.js'
   };
 
-// mongoose.connect('mongodb://127.0.0.1:27017/express-server', {
-//     useNewUrlParser: true,
-//     useCreateIndex: true,
-//     useFindAndModify: false,
-//     useUnifiedTopology: true
-// })
+mongoose.connect('mongodb://localhost:27017/Pizza', {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true
+}, (error) => {
+    if (!error) {
+        console.log('success')
+    } else {
+        console.log('error');
+    }
+})
 
 const app = express()
 app.use(cors());
