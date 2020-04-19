@@ -7,7 +7,7 @@
           <div class="menu-table-header__item">Price</div>
           <div class="menu-table-header__item">Add to cart</div>
         </div>
-        <div class="menu-table-content" v-for="item in goodsList" :key="item.id">
+        <div class="menu-table-content" v-for="item in goodsListArr" :key="item.id">
            <div class="menu-table-content__title">{{ item.name }}</div>
            <div class="menu-table-content__title">{{ item.description }}</div>
           <div class="menu-table-content-desc"
@@ -24,16 +24,16 @@
       </div>
       <div class="menu-cart">
         <div class="menu-cart__info"
-             v-if="cartList.length === 0"
+             v-if="cartListArr.length === 0"
         >Your cart is empty!</div>
         <div class="menu-cart-header"
-             v-if="cartList.length !== 0">
+             v-if="cartListArr.length !== 0">
           <div class="menu-cart-header__item">Size</div>
           <div class="menu-cart-header__item">Price</div>
           <div class="menu-cart-header__item">Add to cart</div>
         </div>
         <div class="menu-cart-content"
-             v-for="(el, i) in cartList"
+             v-for="(el, i) in cartListArr"
              :key="i"
         >
           <div class="menu-cart-content-desc__item">
@@ -53,10 +53,10 @@
           </div>
         </div>
         <div class="menu-cart-total"
-             v-if="cartList.length !== 0">
+             v-if="cartListArr.length !== 0">
           Order total:
         </div>
-        <button v-if="cartList.length !== 0">
+        <button v-if="cartListArr.length !== 0">
           Place Order
         </button>
       </div>
@@ -69,11 +69,13 @@ import GoodsApi from '../api/GoodsApi';
 
 export default {
   name: 'MenuTemplate',
-  data() {
-    return {
-      cartList: [],
-      goodsList: [],
-    };
+  computed: {
+    goodsListArr() {
+      return this.$store.getters.goodsList;
+    },
+    cartListArr() {
+      return this.$store.getters.cartList;
+    },
   },
   methods: {
     removeFromCart(el) {
@@ -86,7 +88,7 @@ export default {
         price: options.price,
         quantity: 1,
       };
-      this.cartList.push(item);
+      this.$store.commit('setCartItem', item);
     },
     quantityPlus(el) {
       // eslint-disable-next-line no-param-reassign,no-plusplus
@@ -103,7 +105,7 @@ export default {
   beforeMount() {
     GoodsApi.getGoodsList()
       .then((resp) => {
-        this.goodsList = resp.data;
+        this.$store.commit('setGoodsList', resp.data);
       }).catch((err) => {
         console.error(err);
       });

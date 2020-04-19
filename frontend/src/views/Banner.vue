@@ -2,14 +2,16 @@
     <div class="banner">
       <HeaderTemplate/>
       <BannerTemplate/>
-      <div class="banner-row">
-        <div class="banner-row__item"
-             v-for="item in infoSection"
-             :key="item.name"
-        >
-          <components
-            :is="item.component"
-          />
+      <div class="container">
+        <div class="banner-row">
+          <div class="banner-row__item"
+               v-for="item in infoSection"
+               :key="item.name"
+          >
+            <components
+              :is="item.component"
+            />
+          </div>
         </div>
       </div>
     </div>
