@@ -2,7 +2,9 @@
     <header class="header">
       <div class="container">
         <div class="header-row">
-          <div class="header-row__logo">
+          <div class="header-row__logo"
+               @click="proceedToHomePage()"
+          >
             PIZZA PLANET
           </div>
           <nav class="header-row__nav">
@@ -37,6 +39,11 @@ export default {
       ],
     };
   },
+  methods: {
+    proceedToHomePage() {
+      this.$router.push('/banner');
+    },
+  },
 };
 </script>
 
@@ -45,7 +52,7 @@ export default {
 
   .header {
     min-height: 80px;
-    background: $headerBg;
+    background: red;
     padding: 30px 0;
     &-row {
       display: flex;

@@ -1,6 +1,6 @@
 <template>
-  <div class="menu">
-    <div class="container">
+  <div class="container">
+    <div class="menu">
       <div class="menu-table">
         <div class="menu-table-header">
           <div class="menu-table-header__item">Size</div>
@@ -26,7 +26,8 @@
         <div class="menu-cart__info"
              v-if="cartList.length === 0"
         >Your cart is empty!</div>
-        <div class="menu-cart-header">
+        <div class="menu-cart-header"
+             v-if="cartList.length !== 0">
           <div class="menu-cart-header__item">Size</div>
           <div class="menu-cart-header__item">Price</div>
           <div class="menu-cart-header__item">Add to cart</div>
@@ -51,10 +52,13 @@
             {{ el.price * el.quantity }}
           </div>
         </div>
-        <div class="menu-cart-total">
+        <div class="menu-cart-total"
+             v-if="cartList.length !== 0">
           Order total:
         </div>
-        <button>Place Order</button>
+        <button v-if="cartList.length !== 0">
+          Place Order
+        </button>
       </div>
     </div>
   </div>
@@ -109,6 +113,7 @@ export default {
 
 <style scoped lang="scss">
   .menu {
+    display: flex;
     &-cart {
       &-content {
         display: flex;

@@ -17,7 +17,9 @@
                      @keyup.enter="editState = false"
               >
             </template>
-            <button class="button">Let's order!</button>
+            <button class="button"
+                    @click="proceedToMenu()"
+            >Let's order!</button>
           </div>
         </div>
       </div>
@@ -33,6 +35,11 @@ export default {
       message: 'Feeling hungry?',
       editState: false,
     };
+  },
+  methods: {
+    proceedToMenu() {
+      this.$router.push('/menu');
+    },
   },
 };
 </script>
