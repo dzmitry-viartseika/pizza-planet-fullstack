@@ -49,12 +49,6 @@ const routes = [
     path: '/banner',
     name: 'Banner',
     component: Banner,
-    components: {
-      default: Banner,
-      'ordering-guide': OrderingGuide,
-      delivery: Delivery,
-      history: History,
-    },
   },
   {
     path: '/admin',

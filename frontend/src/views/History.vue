@@ -1,6 +1,6 @@
 <template>
     <div>
-      <HeaderTemplate/>
+      <HeaderTemplate v-if="false"/>
       <div class="contact">
         <h1>History</h1>
       </div>
