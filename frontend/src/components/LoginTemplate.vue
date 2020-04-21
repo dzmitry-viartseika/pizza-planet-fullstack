@@ -46,10 +46,24 @@ export default {
   },
   methods: {
     signUp() {
-      UserApi.sendSignUp(this.user);
+      UserApi.sendSignUp(this.user).then((resp) => {
+        console.log('resp', resp);
+        console.log('sign up');
+        this.$router.push('/banner');
+      }).catch((err) => {
+        console.log(err);
+      });
     },
     logIn() {
-      console.log('login');
+      UserApi.sendLogin(this.user.login, this.user.password).then((resp) => {
+        this.token = resp.data.token;
+        localStorage.setItem('token', JSON.stringify(this.token));
+        if (this.token) {
+          this.$router.push('/banner');
+        }
+      }).catch((err) => {
+        console.error(err);
+      });
     },
   },
 };
