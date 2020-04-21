@@ -1,10 +1,10 @@
 <template>
   <div class="login">
-    <form class="login__form">
+    <div class="login__form">
       <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input type="email"
-               v-model="user.email"
+               v-model="user.login"
                class="form-control"
                id="exampleInputEmail1"
                aria-describedby="emailHelp"
@@ -27,7 +27,7 @@
                 @click="logIn()"
         >Log in</button>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -39,14 +39,13 @@ export default {
   data() {
     return {
       user: {
-        email: '',
+        login: '',
         password: '',
       },
     };
   },
   methods: {
     signUp() {
-      console.log('signup');
       UserApi.sendSignUp(this.user);
     },
     logIn() {
