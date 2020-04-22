@@ -9,9 +9,11 @@
 
 <script>
 import HeaderTemplate from '../components/HeaderTemplate.vue';
+import localStorageToken from '../mixins/localStorageToken';
 
 export default {
   name: 'Contact',
+  mixins: [localStorageToken],
   components: {
     HeaderTemplate,
   },

@@ -23,9 +23,11 @@ import BannerTemplate from '../components/BannerTemplate.vue';
 import OrderingGuide from './OrderingGuide.vue';
 import Delivery from './Delivery.vue';
 import History from './History.vue';
+import LocalStorageToken from '../mixins/localStorageToken';
 
 export default {
   name: 'Banner',
+  mixins: [LocalStorageToken],
   data() {
     return {
       infoSection: [

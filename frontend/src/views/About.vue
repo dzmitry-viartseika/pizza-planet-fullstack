@@ -17,9 +17,11 @@
 <script>
 import HeaderTemplate from '../components/HeaderTemplate.vue';
 import FooterTemplate from '../components/FooterTemplate.vue';
+import localStorageToken from '../mixins/localStorageToken';
 
 export default {
   name: 'About',
+  mixins: [localStorageToken],
   components: {
     HeaderTemplate,
     FooterTemplate,
