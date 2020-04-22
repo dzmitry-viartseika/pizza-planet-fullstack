@@ -54,7 +54,7 @@
         </div>
         <div class="menu-cart-total"
              v-if="cartListArr.length !== 0">
-          Order total:
+          Order total: {{ totalPrice }}
         </div>
         <button v-if="cartListArr.length !== 0">
           Place Order
@@ -75,6 +75,16 @@ export default {
     },
     cartListArr() {
       return this.$store.getters.cartList;
+    },
+    totalPrice() {
+      const res = [];
+      if (this.cartListArr.length !== 0) {
+        this.cartListArr.forEach((item) => {
+          res.push(+item.price * item.quantity);
+        });
+        const result = res.reduce((sum, el) => sum + el);
+        return result.toFixed(2);
+      } return 0;
     },
   },
   methods: {
