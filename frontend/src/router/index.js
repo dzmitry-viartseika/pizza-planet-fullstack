@@ -9,6 +9,15 @@ import History from '../views/History.vue';
 import Admin from '../views/Admin.vue';
 import OrderingGuide from '../views/OrderingGuide.vue';
 
+// const Menu = import('../views/Menu.vue');
+// const Banner = import('../views/Banner.vue');
+// const Contact = import('../views/Contact.vue');
+// const Delivery = import('../views/Delivery.vue');
+// const History = import('../views/History.vue');
+// const Admin = import('../views/Admin.vue');
+// const OrderingGuide = import('../views/OrderingGuide.vue');
+// const Login = import('../views/Login.vue');
+
 Vue.use(VueRouter);
 
 const routes = [
