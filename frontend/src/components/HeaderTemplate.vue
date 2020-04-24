@@ -6,6 +6,7 @@
                @click="proceedToHomePage()"
           >
             PIZZA PLANET
+            {{ userName }}
           </div>
           <nav class="header-row__nav">
             <ul class="header-row__nav-list">
@@ -38,6 +39,11 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    userName() {
+      return this.$store.getters.userName;
+    },
   },
   methods: {
     proceedToHomePage() {

@@ -18,6 +18,12 @@
                id="exampleInputPassword1"
                placeholder="Password"
         >
+        <div class="error"
+             v-if="errorSignInfo"
+        >Login and password is required</div>
+        <div class="error"
+             v-if="errorLoginInfo"
+        >User unable</div>
       </div>
       <div class="form-group login__btns">
         <button type="submit" class="btn btn-danger"
@@ -42,15 +48,22 @@ export default {
         login: '',
         password: '',
       },
+      errorSignInfo: false,
+      errorLoginInfo: false,
     };
   },
   methods: {
     signUp() {
       UserApi.sendSignUp(this.user).then((resp) => {
         console.log('resp', resp);
-        console.log('sign up');
+        this.$store.commit('setUserName', this.user.login);
         this.$router.push('/banner');
       }).catch((err) => {
+        this.errorLoginInfo = false;
+        this.errorSignInfo = true;
+        setTimeout(() => {
+          this.errorSignInfo = false;
+        }, 3000);
         console.log(err);
       });
     },
@@ -59,9 +72,15 @@ export default {
         this.token = resp.data.token;
         localStorage.setItem('token', JSON.stringify(this.token));
         if (this.token) {
+          this.$store.commit('setUserName', this.user.login);
           this.$router.push('/banner');
         }
       }).catch((err) => {
+        this.errorSignInfo = false;
+        this.errorLoginInfo = true;
+        setTimeout(() => {
+          this.errorLoginInfo = false;
+        }, 3000);
         console.error(err);
       });
     },

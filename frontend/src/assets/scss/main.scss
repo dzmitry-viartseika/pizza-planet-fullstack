@@ -9,3 +9,13 @@
   max-width: 1130px;
   margin: 0 auto;
 }
+
+.error {
+  position: absolute;
+  color: $errorColor;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 25px;
+}
