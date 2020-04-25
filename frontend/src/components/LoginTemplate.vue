@@ -72,7 +72,6 @@ export default {
         this.token = resp.data.token;
         localStorage.setItem('token', JSON.stringify(this.token));
         if (this.token) {
-          this.$store.commit('setUserName', this.user.login);
           this.$router.push('/banner');
         }
       }).catch((err) => {

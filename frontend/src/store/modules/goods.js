@@ -2,7 +2,7 @@ export default {
   state: {
     goodsList: [],
     cartList: [],
-    userName: 'unn',
+    userName: '',
   },
   getters: {
     goodsList: (state) => state.goodsList,
