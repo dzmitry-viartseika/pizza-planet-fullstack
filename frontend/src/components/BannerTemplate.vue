@@ -4,7 +4,9 @@
       <div class="home-banner">
         <div class="home-banner-info">
           <div class="home-banner-info__main">
-            <h1 class="home-banner-info__main-title">Welcome to Pizza Planet!</h1>
+            <h1 class="home-banner-info__main-title">Welcome to Pizza Planet!
+              {{ this.$store.getters.userName }}
+            </h1>
             <template v-if="!editState">
               <h2 class="home-banner-info__main-subtitle"
                   @click="editState = true"

@@ -40,6 +40,8 @@
 <script>
 import UserApi from '../api/UserApi';
 
+const generateUniqueId = require('generate-unique-id');
+
 export default {
   name: 'LoginTemplate',
   data() {
@@ -56,6 +58,12 @@ export default {
     signUp() {
       UserApi.sendSignUp(this.user).then((resp) => {
         console.log('resp', resp);
+        this.token = generateUniqueId({
+          includeSymbols: ['@', '#', '|'],
+          excludeSymbols: ['0'],
+          length: 32,
+        });
+        localStorage.setItem('token', JSON.stringify(this.token));
         this.$store.commit('setUserName', this.user.login);
         this.$router.push('/banner');
       }).catch((err) => {
@@ -71,6 +79,8 @@ export default {
       UserApi.sendLogin(this.user.login, this.user.password).then((resp) => {
         this.token = resp.data.token;
         localStorage.setItem('token', JSON.stringify(this.token));
+        this.$store.commit('setUserName', this.user.login);
+        this.$store.commit('setUserRole', resp.data.user.role);
         if (this.token) {
           this.$router.push('/banner');
         }

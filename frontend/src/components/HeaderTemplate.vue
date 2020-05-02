@@ -6,6 +6,13 @@
                @click="proceedToHomePage()"
           >
             PIZZA PLANET
+            <div>
+              <br>
+              Login as {{ userName }}
+              {{ this.$store.getters.userRole }}
+              <button class="btn btn-warning"
+                      @click="signOff()">Sign off</button>
+            </div>
           </div>
           <nav class="header-row__nav">
             <ul class="header-row__nav-list">
@@ -13,7 +20,10 @@
                   v-for="(item,i) in menu"
                   :key="i"
               >
-                <a :href="item.route" class="header-row__nav-link">{{ item.title }}</a>
+                <a @click="proceedToPage(item.route)"
+                   class="header-row__nav-link">
+                  {{ item.title }}
+                </a>
               </li>
             </ul>
           </nav>
@@ -39,7 +49,20 @@ export default {
       ],
     };
   },
+  computed: {
+    userName() {
+      return this.$store.getters.userName;
+    },
+  },
   methods: {
+    signOff() {
+      localStorage.removeItem('token');
+      this.$store.commit('setUserName', '');
+      this.$router.push('/');
+    },
+    proceedToPage(page) {
+      this.$router.push(`${page}`);
+    },
     proceedToHomePage() {
       this.$router.push('/banner');
     },

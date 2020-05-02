@@ -6,34 +6,37 @@
            :class="{ 'form-group--error': $v.name.$error }"
       >
         <div class="text-field__info">Name</div>
-        <input type="text" v-model.trim="newItem.name">
+        <input class="form-control" type="text" v-model.trim="newItem.name">
         <div class="error" v-if="!$v.name.required">Email is required</div>
         <div class="error" v-if="!$v.name.minLength">Email must have at least
           {{$v.name.$params.minLength.min}} letters.</div>
       </div>
       <div class="text-field">
         <div class="text-field__info">Description</div>
-        <textarea cols="30" rows="10" v-model="newItem.description"></textarea>
+        <textarea class="form-control" cols="30" rows="10" v-model="newItem.description"></textarea>
       </div>
       <h3 class="title__subtitle">Option1</h3>
       <div class="text-field">
         <div class="text-field__info">Size('')</div>
-        <input type="text" v-model="newItem.options[0].size">
+        <input class="form-control" type="text" v-model="newItem.options[0].size">
       </div>
       <div class="text-field">
         <div class="text-field__info">Price</div>
-        <input type="text" v-model="newItem.options[0].price">
+        <input class="form-control" type="text" v-model="newItem.options[0].price">
       </div>
       <h3 class="title__subtitle">Option2</h3>
       <div class="text-field">
         <div class="text-field__info">Size('')</div>
-        <input type="text" v-model="newItem.options[1].size">
+        <input class="form-control" type="text" v-model="newItem.options[1].size">
       </div>
       <div class="text-field">
         <div class="text-field__info">Price</div>
-        <input type="text" v-model="newItem.options[1].price">
+        <input class="form-control" type="text" v-model="newItem.options[1].price">
       </div>
-      <button @click="addItem()">Add</button>
+      <button @click="addItem()"
+              class="btn btn-primary">
+        Add
+      </button>
     </form>
   </div>
 </template>

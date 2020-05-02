@@ -20,6 +20,10 @@
               <button @click="addToCart(item.name, elem)">+</button>
             </div>
           </div>
+          <button @click="deleteFromDataBase(item)"
+                  class="btn btn-primary"
+          >Delete from DB</button>
+          <!--                  v-if="role === 'admin'"-->
         </div>
       </div>
       <div class="menu-cart">
@@ -61,15 +65,23 @@
         </button>
       </div>
     </div>
+    <pizza-component v-if="role === 'admin'"/>
   </div>
 </template>
 
 <script>
 import GoodsApi from '../api/GoodsApi';
+import PizzaComponent from './PizzaComponent.vue';
 
 export default {
   name: 'MenuTemplate',
+  components: {
+    PizzaComponent,
+  },
   computed: {
+    role() {
+      return this.$store.getters.userRole;
+    },
     goodsListArr() {
       return this.$store.getters.goodsList;
     },
@@ -88,6 +100,12 @@ export default {
     },
   },
   methods: {
+    deleteFromDataBase(item) {
+      console.log('item', item);
+      const { _id } = item;
+      this.$store.commit('deleteGoodsListItem', _id);
+      GoodsApi.deleteItem(_id);
+    },
     removeFromCart(el) {
       this.cartList.splice(this.cartList.indexOf(el), 1);
     },

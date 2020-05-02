@@ -15,4 +15,10 @@ export default {
     });
     return instWithCred.post('/newItem', { item });
   },
+  deleteItem(id) {
+    const instWithCred = axios.create({
+      baseURL: domains.GOODS_LIST,
+    });
+    return instWithCred.delete(`/deleteItem/${id}`);
+  },
 };
