@@ -1,7 +1,7 @@
 <template>
   <div class="pizza">
     <h2 class="title">Add new Pizza:</h2> {{ newItem }}
-    <form>
+    <form @submit.prevent="addItem()">
       <div class="text-field"
            :class="{ 'form-group--error': $v.name.$error }"
       >
@@ -33,7 +33,7 @@
         <div class="text-field__info">Price</div>
         <input class="form-control" type="text" v-model="newItem.options[1].price">
       </div>
-      <button @click="addItem()"
+      <button type="submit"
               class="btn btn-primary">
         Add
       </button>

@@ -25,8 +25,9 @@ export default {
       state.userRole = data;
     },
     deleteGoodsListItem(state, id) {
-      console.log('deleteGoodsListItem id', id);
-      state.goodsList.splice(state.goodsList.indexOf(id), 1);
+      // eslint-disable-next-line no-underscore-dangle
+      const index = state.goodsList.findIndex((item) => item._id === id);
+      state.goodsList.splice(index, 1);
     },
   },
 };

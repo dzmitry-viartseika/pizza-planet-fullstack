@@ -7,8 +7,8 @@
           <div class="menu-table-header__item">Price</div>
           <div class="menu-table-header__item">Add to cart</div>
         </div>
-        <div class="menu-table-content" v-for="item in goodsListArr" :key="item.id">
-           <div class="menu-table-content__title">{{ item.name }}</div>
+        <div class="menu-table-content" v-for="item in goodsListArr" :key="item._id">
+           <div class="menu-table-content__title">{{ item.name }} {{item._id }}</div>
            <div class="menu-table-content__title">{{ item.description }}</div>
           <div class="menu-table-content-desc"
                v-for="(elem, i) in item.options"
@@ -22,8 +22,8 @@
           </div>
           <button @click="deleteFromDataBase(item)"
                   class="btn btn-primary"
+                  v-if="role === 'admin'"
           >Delete from DB</button>
-          <!--                  v-if="role === 'admin'"-->
         </div>
       </div>
       <div class="menu-cart">

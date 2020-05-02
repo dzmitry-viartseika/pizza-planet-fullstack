@@ -22,11 +22,8 @@ class GoodsController {
         item.save()
     };
     deleteItem = async (req, res) => {
-        console.log('wertey');
-        console.log('req', req.query.id);
         const id = req.query.id;
         const o_id = new ObjectId(id);
-        console.log('o_id', o_id);
         PizzaList.deleteOne({ _id: o_id }, function(err, result) {
             if (err) {
                 res.send('err');

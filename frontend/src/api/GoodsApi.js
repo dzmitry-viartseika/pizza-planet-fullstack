@@ -19,6 +19,6 @@ export default {
     const instWithCred = axios.create({
       baseURL: domains.GOODS_LIST,
     });
-    return instWithCred.delete(`/deleteItem/${id}`);
+    return instWithCred.delete(`/deleteItem/?id=${id}`);
   },
 };
