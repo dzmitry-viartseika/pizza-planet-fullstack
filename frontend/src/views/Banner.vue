@@ -61,6 +61,7 @@ export default {
       align-items: center;
       &__item {
         width: 33%;
+        padding: 10px;
       }
     }
   }

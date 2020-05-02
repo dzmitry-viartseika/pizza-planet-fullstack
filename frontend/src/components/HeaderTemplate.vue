@@ -93,6 +93,7 @@ export default {
         }
         &-link {
           text-decoration: none;
+          cursor: pointer;
         }
       }
     }

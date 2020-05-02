@@ -3,38 +3,68 @@
     <div class="menu">
       <div class="menu-table">
         <div class="menu-table-header">
-          <div class="menu-table-header__item">Size</div>
-          <div class="menu-table-header__item">Price</div>
-          <div class="menu-table-header__item">Add to cart</div>
+          <div class="menu-table-header__item">
+            Size
+          </div>
+          <div class="menu-table-header__item">
+            Price
+          </div>
+          <div class="menu-table-header__item">
+            Add to cart
+          </div>
         </div>
-        <div class="menu-table-content" v-for="item in goodsListArr" :key="item._id">
-           <div class="menu-table-content__title">{{ item.name }} {{item._id }}</div>
-           <div class="menu-table-content__title">{{ item.description }}</div>
+        <div class="menu-table-content"
+             v-for="item in goodsListArr"
+             :key="item._id">
+           <div class="menu-table-content__title">
+             Name: {{ item.name }}
+           </div>
+           <div class="menu-table-content__title">
+             Description: {{ item.description }}
+           </div>
           <div class="menu-table-content-desc"
                v-for="(elem, i) in item.options"
                :key="i"
           >
-            <div class="menu-table-content-desc__item">{{ elem.size }} ''</div>
-            <div class="menu-table-content-desc__item">{{ elem.price }}</div>
             <div class="menu-table-content-desc__item">
-              <button @click="addToCart(item.name, elem)">+</button>
+              {{ elem.size }} ''
+            </div>
+            <div class="menu-table-content-desc__item">
+              {{ elem.price }}
+            </div>
+            <div class="menu-table-content-desc__item">
+              <button @click="addToCart(item.name, elem)"
+                      class="btn btn-warning"
+              >
+                +
+              </button>
             </div>
           </div>
           <button @click="deleteFromDataBase(item)"
-                  class="btn btn-primary"
+                  class="btn btn-primary menu__button_delete"
                   v-if="role === 'admin'"
-          >Delete from DB</button>
+          >
+            Delete from DB
+          </button>
         </div>
       </div>
       <div class="menu-cart">
         <div class="menu-cart__info"
              v-if="cartListArr.length === 0"
-        >Your cart is empty!</div>
+        >
+          Your cart is empty!
+        </div>
         <div class="menu-cart-header"
              v-if="cartListArr.length !== 0">
-          <div class="menu-cart-header__item">Size</div>
-          <div class="menu-cart-header__item">Price</div>
-          <div class="menu-cart-header__item">Add to cart</div>
+          <div class="menu-cart-header__item">
+            Size
+          </div>
+          <div class="menu-cart-header__item">
+            Price
+          </div>
+          <div class="menu-cart-header__item">
+            Add to cart
+          </div>
         </div>
         <div class="menu-cart-content"
              v-for="(el, i) in cartListArr"
@@ -58,14 +88,12 @@
         </div>
         <div class="menu-cart-total"
              v-if="cartListArr.length !== 0">
-          Order total: {{ totalPrice }}
+          Order total: {{ totalPrice }}$
         </div>
-        <button v-if="cartListArr.length !== 0">
-          Place Order
-        </button>
       </div>
     </div>
-    <pizza-component v-if="role === 'admin'"/>
+    <pizza-component/>
+<!--    v-if="role === 'admin'"-->
   </div>
 </template>
 
@@ -101,13 +129,12 @@ export default {
   },
   methods: {
     deleteFromDataBase(item) {
-      console.log('item', item);
       const { _id } = item;
       this.$store.commit('deleteGoodsListItem', _id);
       GoodsApi.deleteItem(_id);
     },
     removeFromCart(el) {
-      this.cartList.splice(this.cartList.indexOf(el), 1);
+      this.cartListArr.splice(this.cartListArr.indexOf(el), 1);
     },
     addToCart(naming, options) {
       const item = {
@@ -144,45 +171,69 @@ export default {
 <style scoped lang="scss">
   .menu {
     display: flex;
+
+    &__button {
+
+      &_delete {
+        margin: 15px 0;
+      }
+    }
+
     &-cart {
+
       &-content {
         display: flex;
         flex-direction: row;
       }
+      &-total {
+        font-size: 20px;
+        font-weight: bold;
+      }
     }
     &-table, &-cart {
       width: 600px;
+      padding: 20px;
+
       &-header {
         display: flex;
         flex-direction: row;
         align-items: center;
         height: 40px;
         background: lightgray;
+
         &__item {
           width: 20%;
           padding: 10px 20px;
+
           &:first-child {
             width: 50%;
           }
         }
       }
       &-content {
+        border: 1px solid black;
+        margin-bottom: 10px;
+        padding: 10px;
+
         &__title {
           margin-bottom: 10px;
           border-bottom: 1px solid gray;
         }
+
         &-desc {
           display: flex;
           flex-direction: row;
           align-items: center;
+
           &__item {
             width: 20%;
             padding: 10px 20px;
+
             &:first-child {
               width: 50%;
             }
+
             & button {
-              border: 1px solid red;
               width: 40px;
               height: 40px;
             }
